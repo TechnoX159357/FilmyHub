@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Hollywood{% endblock title %}
+
+{% block body %}
+
+
+
+
+
+<!-- dispaly movie in cards -->
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+{% for movie in movies %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+             <img src={{movie.image}} class="card-img" alt="..." height="200">
+            <div class="card-body">
+              <p class="card-text">
+              <small>
+              Name : {{movie.name}}</br>
+              Imdb : {{movie.imdb}}</br>
+              language : {{movie.language}}</br>
+              Genres : {{movie.genres}}</br>
+              Length : {{movie.length}}</br>
+              </small> 
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href={{movie.link}}><button type="button" class="btn btn-sm btn-outline-secondary">Download</button></a>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+{% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+<!-- pagination -->
+<div class="align-center">
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {% if movies.has_previous %}  
+    <li class="page-item">
+      <a class="page-link" href="?page={{movies.previous_page_number}}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+    <li class="page-item"><a class="page-link" href="#">{{movies.number}}</a></li>
+    {% if movies.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{movies.next_page_number}}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+</div>
+
+
+{% endblock body %}
